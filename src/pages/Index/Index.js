@@ -1,5 +1,5 @@
 import React from 'react'
-import { Carousel, Flex, Grid } from 'antd-mobile'
+import { Carousel, Flex, Grid, WingBlank } from 'antd-mobile'
 import axios from 'axios'
 import './index.scss'
 // 导入图片
@@ -22,30 +22,50 @@ class Index extends React.Component {
     dotActiveStyle: {
       backgroundColor: '#e92322'  //当前激活的小圆点的样式
     },
-    group: [] //租房小组
+    group: [], //租房小组
+    news: []
   }
   // 轮播图
   carousel() {
-    return <Carousel autoplay infinite className="carousel" dotActiveStyle={this.state.dotActiveStyle}>
-      {this.state.carouselList.map(item => (
-        <a
-          key={item.id}
-          href="http://www.alipay.com"
-          style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
-        >
-          <img
-            src={`http://localhost:8080${item.imgSrc}`}
-            alt=""
-            style={{ width: '100%', verticalAlign: 'top' }}
-            onLoad={() => {
-              // fire window resize event to change height
-              window.dispatchEvent(new Event('resize'));
-              this.setState({ imgHeight: 'auto' });
-            }}
-          />
-        </a>
-      ))}
-    </Carousel>
+    return <div className="header">
+      <Carousel autoplay infinite className="carousel" dotActiveStyle={this.state.dotActiveStyle}>
+        {this.state.carouselList.map(item => (
+          <a
+            key={item.id}
+            href="http://www.alipay.com"
+            style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
+          >
+            <img
+              src={`http://localhost:8080${item.imgSrc}`}
+              alt=""
+              style={{ width: '100%', verticalAlign: 'top' }}
+              onLoad={() => {
+                // fire window resize event to change height
+                window.dispatchEvent(new Event('resize'));
+                this.setState({ imgHeight: 'auto' });
+              }}
+            />
+          </a>
+        ))}
+      </Carousel>
+      <div className="header-nav">
+        <div className="header-more">
+          <div className="city" onClick={()=>{
+            this.props.history.push('/citylist')
+          }}>
+            <span>上海</span>
+            <i className="iconfont icon-arrow"></i>
+          </div>
+          <div className="search">
+            <i className="iconfont icon-seach"></i>
+            <span>请输入小区地址</span>
+          </div>
+        </div>
+        <div className="map">
+          <i className="iconfont icon-map"></i>
+        </div>
+      </div>
+    </div>
   }
   // 发送ajax
   async getCarouselList() {
@@ -66,14 +86,29 @@ class Index extends React.Component {
     })
     // console.log(res)
     let { body } = res.data
-    console.log(body)
+    // console.log(body)
     this.setState({
       group: body
+    })
+  }
+  // 获取信息
+  async getNews() {
+    let res = await axios.get('http://localhost:8080/home/news', {
+      params: {
+        area: `AREA%7C88cff55c-aaa4-e2e0`
+      }
+    })
+    // console.log(res)
+    let { body } = res.data
+    // console.log(body)
+    this.setState({
+      news: body
     })
   }
   async componentDidMount() {
     this.getCarouselList()
     this.getGroups()
+    this.getNews()
   }
   // 导航区域
   navList() {
@@ -101,6 +136,22 @@ class Index extends React.Component {
       )} className="group-grid" square={false}>
       </Grid>)
   }
+  // 信息
+  news() {
+    let { news } = this.state
+    return (
+      news.map(item => (<div key={item.id} className="news">
+        <img src={`http://localhost:8080${item.imgSrc}`} alt="" className="news-img" />
+        <Flex className="news-title" direction="column" justify="between">
+          <h3>{item.title}</h3>
+          <Flex className="news-info" justify="between">
+            <span>{item.from}</span>
+            <span>{item.date}</span>
+          </Flex>
+        </Flex>
+      </div>))
+    )
+  }
   // 异步加载，刚开始加载完成图片没有渲染，所以轮播图未生效
   render() {
     let { carouselList } = this.state
@@ -116,6 +167,12 @@ class Index extends React.Component {
           <Flex.Item className="group-more">更多</Flex.Item>
         </Flex>
         {this.group()}
+        {/* 信息 */}
+        <div className="latest">
+          <WingBlank>
+            <h3 className="latest-info">最新资讯</h3>{this.news()}
+          </WingBlank>
+        </div>
       </div>
     )
   }
