@@ -14,6 +14,18 @@ const navData = [
   { pathname: '/map', id: 3, text: '地图找房', navUrl: nav3 },
   { pathname: '/login', id: 4, text: '去出租', navUrl: nav4 }
 ]
+// 城市选择
+// if (navigator.geolocation) {
+//   navigator.geolocation.getCurrentPosition(position => {
+//     // position对象表示当前位置信息
+//     // 常用： latitude 纬度 / longitude 经度
+//     // 知道： accuracy 经纬度的精度 / altitude 海拔高度 / altitudeAccuracy 海拔高度的精度 / heading 设备行进方向 / speed 速度
+//     console.log(position)
+//   }, function (e) {
+//     throw (e.message);
+//    }
+//   )
+// }
 class Index extends React.Component {
   state = {
     data: ['1', '2', '3'],
@@ -23,7 +35,8 @@ class Index extends React.Component {
       backgroundColor: '#e92322'  //当前激活的小圆点的样式
     },
     group: [], //租房小组
-    news: []
+    news: [],
+    currCity: '上海'
   }
   // 轮播图
   carousel() {
@@ -50,10 +63,10 @@ class Index extends React.Component {
       </Carousel>
       <div className="header-nav">
         <div className="header-more">
-          <div className="city" onClick={()=>{
+          <div className="city" onClick={() => {
             this.props.history.push('/citylist')
           }}>
-            <span>上海</span>
+            <span>{this.state.currCity}</span>
             <i className="iconfont icon-arrow"></i>
           </div>
           <div className="search">
@@ -61,13 +74,13 @@ class Index extends React.Component {
             <span>请输入小区地址</span>
           </div>
         </div>
-        <div className="map">
+        <div className="map" onClick={() => this.props.history.push('/map')}>
           <i className="iconfont icon-map"></i>
         </div>
       </div>
     </div>
   }
-  // 发送ajax
+  // 发送ajax  轮播图
   async getCarouselList() {
     let res = await axios.get('http://localhost:8080/home/swiper')
     // console.log(res)
@@ -109,6 +122,23 @@ class Index extends React.Component {
     this.getCarouselList()
     this.getGroups()
     this.getNews()
+    // 利用百度地图api获取当前城市
+    let myCity = new window.BMap.LocalCity();
+    myCity.get(async result => {
+      // console.log(result)
+      // 根据城市名称查询城市信息
+     let res = await axios.get('http://localhost:8080/area/info',{
+        params:{
+          name: result.name
+        }
+      })
+      // console.log(res)
+      const {body} = res.data
+      // 存储  设置当前城市
+      this.setState({
+        currCity: body.label
+      })
+    })
   }
   // 导航区域
   navList() {
