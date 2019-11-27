@@ -1,4 +1,5 @@
-import axios from 'axios'
+// import axios from 'axios'
+import {API} from '../API'
 // 获取当前定位城市
 // 异步处理  回调函数
 function getCurrCity() {
@@ -10,7 +11,7 @@ function getCurrCity() {
       myCity.get(async result => {
         // console.log(result)
         // 根据城市名称查询城市信息
-        let res = await axios.get('http://localhost:8080/area/info', {
+        let res = await API.get('area/info', {
           params: {
             name: result.name
           }
@@ -24,7 +25,7 @@ function getCurrCity() {
     })
   } else {
     // 本地获取
-    let cityObj = localStorage.getItem('hkzf_my')
+    let cityObj = JSON.parse(city)
     // return new Promise(reslove => reslove(cityObj))
     return Promise.resolve(cityObj)
   }

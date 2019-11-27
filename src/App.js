@@ -15,6 +15,7 @@ import Home from './pages/Home/Home'
 import CityList from './pages/CityList/CityList'
 import Map from './pages/Map/Map'
 import Login from './pages/Login/Login'
+import House from './pages/house/house'
 class App extends React.Component {
   render() {
     return (
@@ -25,6 +26,7 @@ class App extends React.Component {
         <Route path="/citylist" component={CityList}></Route>
         <Route path='/map' component={Map}></Route>
         <Route path='/login' component={Login}></Route>
+        <Route path='/house' component={House}></Route>
       </Router>
     )
   }

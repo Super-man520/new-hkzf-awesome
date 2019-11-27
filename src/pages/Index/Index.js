@@ -2,6 +2,8 @@ import React from 'react'
 import { Carousel, Flex, Grid, WingBlank } from 'antd-mobile'
 import axios from 'axios'
 import './index.scss'
+// 导入当前城市
+import { getCurrCity } from '../../utils/CurrCity/currcity'
 // 导入图片
 import nav1 from '../../assets/images/nav-1.png'
 import nav2 from '../../assets/images/nav-2.png'
@@ -36,7 +38,7 @@ class Index extends React.Component {
     },
     group: [], //租房小组
     news: [],
-    currCity: '上海'
+    currCity: '北京'
   }
   // 轮播图
   carousel() {
@@ -123,21 +125,23 @@ class Index extends React.Component {
     this.getGroups()
     this.getNews()
     // 利用百度地图api获取当前城市
-    let myCity = new window.BMap.LocalCity();
-    myCity.get(async result => {
-      // console.log(result)
-      // 根据城市名称查询城市信息
-     let res = await axios.get('http://localhost:8080/area/info',{
-        params:{
-          name: result.name
-        }
-      })
-      // console.log(res)
-      const {body} = res.data
-      // 存储  设置当前城市
-      this.setState({
-        currCity: body.label
-      })
+    // let myCity = new window.BMap.LocalCity();
+    // myCity.get(async result => {
+    //   // console.log(result)
+    //   // 根据城市名称查询城市信息
+    //   let res = await axios.get('http://localhost:8080/area/info', {
+    //     params: {
+    //       name: result.name
+    //     }
+    //   })
+    //   // console.log(res)
+    //   const { body } = res.data
+    //   // 存储  设置当前城市
+    // })
+    let currCity = await getCurrCity()
+    // console.log(currCity)
+    this.setState({
+      currCity: currCity.label
     })
   }
   // 导航区域

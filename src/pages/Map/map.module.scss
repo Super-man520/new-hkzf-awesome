@@ -1,13 +1,156 @@
-
 :global(#container) {
-  width: 100%;
+  width : 100%;
   height: 100%;
 }
+
 .map {
-  width: 100%;
-  height: 100%;
+  width      : 100%;
+  height     : 100%;
   padding-top: 45px;
 }
+
 .mt_45 {
   margin-top: -45px;
+}
+
+// 区镇的房源样式
+.bubble {
+  width        : 70px;
+  height       : 70px;
+  background   : rgba(12, 181, 106, 0.9);
+  border-radius: 50%;
+  border       : 3px solid #ccc;
+  text-align   : center;
+  line-height  : 1.5;
+  padding      : 0 10px;
+}
+
+.title {
+  padding      : 12px 0px 0px;
+  font-size    : 15px;
+  border-bottom: 1px dashed #fff;
+}
+
+// 小区的房源样式
+.rect {
+  width         : 100px;
+  height        : 20px;
+  text-align    : center;
+  // line-height: 20px;
+  background    : rgba(12, 181, 106, 0.9);
+  border-radius : 3px;
+  position      : relative;
+
+  span {
+    display       : inline-block;
+    vertical-align: middle;
+  }
+
+  .housename {
+    width: 70px;
+    // 设置省略
+    overflow     : hidden;
+    white-space  : nowrap;
+    text-overflow: ellipsis;
+  }
+
+  // 设置下三角
+  .arrow {
+    width     : 0;
+    height    : 0;
+    border    : 5px solid transparent;
+    border-top: 5px solid #00a75b;
+    margin    : 0 auto;
+    position  : absolute;
+    bottom    : -10px;
+    left      : 50%;
+    transform : translateX(-50%);
+  }
+}
+
+// 房源列表样式
+.house {
+  width           : 100%;
+  height          : 330px;
+  background-color: #fff;
+  transition      : all 1s;
+  transform       : translate3d(0, 1000px, 0);
+  position        : fixed;
+  bottom          : 0;
+  left            : 0;
+
+  .titlewarp {
+    height          : 60px;
+    background-color: #888;
+    display         : flex;
+    justify-content : space-between;
+    padding         : 0 10px;
+    align-items     : center;
+
+    .housename {
+      font-size: 20px;
+    }
+
+    .housemore {
+      font-size: 14px;
+    }
+  }
+
+  .houseitem {
+    .houselist {
+      height    : 120px;
+      margin-top: 15px;
+      padding-left: 15px;
+
+      .houseimg {
+        float: left;
+
+        img {
+          width : 106px;
+          height: 80px;
+        }
+      }
+
+      .content {
+        line-height : 1.5;
+        overflow    : hidden;
+        padding-left: 15px;
+
+        .title {
+          font         : 700 16px '微软雅黑';
+          padding      : 0;
+          overflow     : hidden;
+          white-space  : nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .desc {
+          font-size: 12px;
+          color    : #afb2b3;
+        }
+
+        .housetag {
+          display   : inline-block;
+          padding   : 3px 5px;
+          color     : #39becd;
+          background: #e1f5f8;
+          margin-right: 5px;
+        }
+
+        .housetag1 {
+          color     : #5aabfd;
+          background: #e6f2ff;
+        }
+
+        .houseprice {
+          font-size: 16px;
+          color    : #fa5741;
+        }
+      }
+    }
+  }
+}
+
+.show {
+  transform: translate3d(0, 0, 0);
 }
