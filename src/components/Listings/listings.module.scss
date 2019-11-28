@@ -1,0 +1,77 @@
+.houselist {
+  height      : 120px;
+  margin-top  : 15px;
+  padding-left: 15px;
+
+  .houseimg {
+    float: left;
+
+    img {
+      width : 106px;
+      height: 80px;
+    }
+  }
+
+  .content {
+    line-height : 1.5;
+    overflow    : hidden;
+    padding-left: 15px;
+
+    .title {
+      font         : 700 16px '微软雅黑';
+      padding      : 0;
+      overflow     : hidden;
+      white-space  : nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .desc {
+      font-size: 12px;
+      color    : #afb2b3;
+    }
+
+    .housetag {
+      display     : inline-block;
+      padding     : 1px 3px;
+      color       : #39becd;
+      background  : #e1f5f8;
+      margin-right: 5px;
+      font-size   : 12px;
+    }
+
+    .tag2 {
+      color     : #5abcfd;
+      background: #e6f2ff;
+    }
+
+    .tag3 {
+      color     : #5a6afd;
+      background: #e6f2ff;
+    }
+
+    .tag4 {
+      color     : #7e39cd;
+      background: #e1f5f8;
+    }
+
+    .tag5 {
+      color     : #cd3994;
+      background: #e1f5f8;
+    }
+    .tag6 {
+      color     : #cd6339;
+      background: #e1f5f8;
+    }
+
+    .houseprice {
+      font-size: 16px;
+      color    : #fa5741;
+      font-size: 13px;
+
+      span {
+        font-size  : 15px;
+        font-weight: 700;
+      }
+    }
+  }
+}

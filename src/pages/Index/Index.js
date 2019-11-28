@@ -4,6 +4,8 @@ import axios from 'axios'
 import './index.scss'
 // 导入当前城市
 import { getCurrCity } from '../../utils/CurrCity/currcity'
+// 导入头部搜索框
+import WithSearchHeader from '../../components/SearchHeader/SearchHeader'
 // 导入图片
 import nav1 from '../../assets/images/nav-1.png'
 import nav2 from '../../assets/images/nav-2.png'
@@ -63,7 +65,7 @@ class Index extends React.Component {
           </a>
         ))}
       </Carousel>
-      <div className="header-nav">
+      {/* <div className="header-nav">
         <div className="header-more">
           <div className="city" onClick={() => {
             this.props.history.push('/citylist')
@@ -79,7 +81,8 @@ class Index extends React.Component {
         <div className="map" onClick={() => this.props.history.push('/map')}>
           <i className="iconfont icon-map"></i>
         </div>
-      </div>
+      </div> */}
+      <WithSearchHeader></WithSearchHeader>
     </div>
   }
   // 发送ajax  轮播图

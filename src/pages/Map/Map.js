@@ -1,8 +1,10 @@
 import React from 'react'
 import styles from './map.module.scss'
-import NavHeader from '../../components/NavHeader/navheader'
+import WithNavHeader from '../../components/NavHeader/navheader'
 import { getCurrCity } from '../../utils/CurrCity/currcity'
-import { Toast } from 'antd-mobile';
+import { Toast } from 'antd-mobile'
+// 导入房源列表
+import Listing from '../../components/Listings/Listings'
 // import Axios from 'axios'
 // 优化axios
 // 方案1 设置baseURL
@@ -38,7 +40,6 @@ class Map extends React.Component {
     var myGeo = new BMap.Geocoder();
     // 将地址解析结果显示在地图上，并调整地图视野    
     myGeo.getPoint(city.label, async (point) => {
-      // point = new BMap.Point(121.618150094325, 31.040657606659842)
       if (point) {
         // map.centerAndZoom(point, 11);
         // 显示小圆点
@@ -216,33 +217,34 @@ class Map extends React.Component {
     })
   }
   // 渲染房屋列表的函数
-  renderHouseList() {
+  // renderHouseList() {
+  //   let { houseList } = this.state
+  //   return (
+  //     // eslint-disable-next-line array-callback-return
+  //     houseList.map(item => (
+  //       <div className={styles.houselist} key={item.houseCode}>
+  //         <div className={styles.houseimg}>
+  //           <img src={`http://localhost:8080${item.houseImg}`} alt="" />
+  //         </div>
+  //         <div className={styles.content}>
+  //           <div className={styles.title}>{item.title}</div>
+  //           <div className={styles.desc}>{item.desc}</div>
+  //           {item.tags.map(item => (
+  //             <span key={item} className={[styles.housetag, styles.housetag1].join(' ')}>{item}</span>
+  //           ))}
+  //           <div className={styles.houseprice}>
+  //             <span>{item.price}</span>元/月
+  //           </div>
+  //         </div>
+  //       </div>
+  //     ))
+  //   )
+  // }
+  render() {
     let { houseList } = this.state
     return (
-      // eslint-disable-next-line array-callback-return
-      houseList.map(item => (
-        <div className={styles.houselist} key={item.houseCode}>
-          <div className={styles.houseimg}>
-            <img src={`http://localhost:8080${item.houseImg}`} alt="" />
-          </div>
-          <div className={styles.content}>
-            <div className={styles.title}>{item.title}</div>
-            <div className={styles.desc}>{item.desc}</div>
-            {item.tags.map(item => (
-              <span key={item} className={[styles.housetag, styles.housetag1].join(' ')}>{item}</span>
-            ))}
-            <div className={styles.houseprice}>
-              <span>{item.price}</span>元/月
-            </div>
-          </div>
-        </div>
-      ))
-    )
-  }
-  render() {
-    return (
       <div className={styles.map}>
-        <NavHeader className={styles.mt_45}>地图找房</NavHeader>
+        <WithNavHeader className={styles.mt_45}>地图找房</WithNavHeader>
         {/* 地图容器 */}
         <div id="container"></div>
         {/* 房源列表 */}
@@ -253,7 +255,7 @@ class Map extends React.Component {
               this.props.history.push('/house/list')
             }}>更多房源</div>
           </div>
-          <div className={styles.houseitem}>{this.renderHouseList()}</div>
+          <div className={styles.houseitem}><Listing houseList={houseList}></Listing></div>
         </div>
       </div>
     )

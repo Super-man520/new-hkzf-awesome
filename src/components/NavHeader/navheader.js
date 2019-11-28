@@ -24,5 +24,5 @@ class NavHeader extends React.Component {
 NavHeader.propTypes = {
   children: PropTypes.string.isRequired
 }
-let withNavHeader = withRouter(NavHeader)
-export default withNavHeader
+let WithNavHeader = withRouter(NavHeader)
+export default WithNavHeader
