@@ -1,0 +1,44 @@
+.registe {
+  height          : 100%;
+  background-color: #fff;
+}
+
+.formItem {
+  height       : 60px;
+  display      : flex;
+  margin-bottom: 10px;
+  font-size    : 18px;
+  border-bottom: 1px solid #ccc;
+
+  .label {
+    width       : 85px;
+    height      : 60px;
+    line-height : 60px;
+    margin-right: 10px;
+  }
+
+  .input {
+    flex      : 1;
+    height    : 60px;
+    border    : none;
+    color     : #000;
+    background: transparent;
+  }
+
+  input::-webkit-input-placeholder {
+    /* 修改字体颜色 */
+    color: #ccc;
+  }
+}
+
+.fontcolor :global(a) {
+  color: #666;
+}
+
+.btnColor {
+  color           : #fff;
+  background-color: rgb(28, 182, 118);
+  border          : 1px solid rgb(28, 182, 118);
+  border-radius   : 2px;
+  margin-bottom   : 30px;
+}

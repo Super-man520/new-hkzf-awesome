@@ -1,7 +1,12 @@
 .houselist {
-  height      : 120px;
-  margin-top  : 15px;
-  padding-left: 15px;
+  height       : 100px;
+  margin-top   : 15px;
+  padding-left : 15px;
+  border-bottom: 1px dashed #ccc;
+
+  &:last-child {
+    border: none;
+  }
 
   .houseimg {
     float: left;
@@ -58,6 +63,7 @@
       color     : #cd3994;
       background: #e1f5f8;
     }
+
     .tag6 {
       color     : #cd6339;
       background: #e1f5f8;

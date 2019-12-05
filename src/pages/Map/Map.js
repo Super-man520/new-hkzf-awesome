@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './map.module.scss'
-import WithNavHeader from '../../components/NavHeader/navheader'
-import { getCurrCity } from '../../utils/CurrCity/currcity'
+import WithNavHeader from '../../components/NavHeader/Navheader'
+import { getCurrCity } from '../../utils/CurrCity/Currcity'
 import { Toast } from 'antd-mobile'
 // 导入房源列表
-import Listing from '../../components/Listings/Listings'
+import WithListing from '../../components/Listings/Listings'
 // import Axios from 'axios'
 // 优化axios
 // 方案1 设置baseURL
@@ -216,30 +216,7 @@ class Map extends React.Component {
       isShow: true   //点击时显示房源数据
     })
   }
-  // 渲染房屋列表的函数
-  // renderHouseList() {
-  //   let { houseList } = this.state
-  //   return (
-  //     // eslint-disable-next-line array-callback-return
-  //     houseList.map(item => (
-  //       <div className={styles.houselist} key={item.houseCode}>
-  //         <div className={styles.houseimg}>
-  //           <img src={`http://localhost:8080${item.houseImg}`} alt="" />
-  //         </div>
-  //         <div className={styles.content}>
-  //           <div className={styles.title}>{item.title}</div>
-  //           <div className={styles.desc}>{item.desc}</div>
-  //           {item.tags.map(item => (
-  //             <span key={item} className={[styles.housetag, styles.housetag1].join(' ')}>{item}</span>
-  //           ))}
-  //           <div className={styles.houseprice}>
-  //             <span>{item.price}</span>元/月
-  //           </div>
-  //         </div>
-  //       </div>
-  //     ))
-  //   )
-  // }
+ 
   render() {
     let { houseList } = this.state
     return (
@@ -255,7 +232,7 @@ class Map extends React.Component {
               this.props.history.push('/house/list')
             }}>更多房源</div>
           </div>
-          <div className={styles.houseitem}><Listing houseList={houseList}></Listing></div>
+          <div className={styles.houseitem}><WithListing houseList={houseList}></WithListing></div>
         </div>
       </div>
     )

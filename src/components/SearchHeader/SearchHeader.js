@@ -1,6 +1,6 @@
 import React from 'react'
 // 导入当前城市
-import { getCurrCity } from '../../utils/CurrCity/currcity'
+import { getCurrCity } from '../../utils/CurrCity/Currcity'
 import './searchheader.scss'
 import { withRouter } from 'react-router-dom'
 class SearchHeader extends React.Component {

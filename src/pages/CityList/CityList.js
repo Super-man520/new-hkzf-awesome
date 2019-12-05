@@ -1,9 +1,9 @@
 import React from 'react'
 import { Toast } from 'antd-mobile'
 // 导入当前城市
-import { getCurrCity } from '../../utils/CurrCity/currcity'
+import { getCurrCity } from '../../utils/CurrCity/Currcity'
 // 导入顶部导航栏
-import NavHeader from '../../components/NavHeader/navheader'
+import NavHeader from '../../components/NavHeader/Navheader'
 import './citylist.scss'
 // import axios from 'axios'
 import { API } from '../../utils/API'
@@ -156,6 +156,7 @@ class CityList extends React.Component {
     // 城市名称的渲染 要根据citylist中字符对应的数组的长度渲染
     // 1. 首先渲染的是哪个字符信息
     let letter = cityIndex[index]
+    // console.log(letter)
     // 2. 接下来获取到citylist中对应的那个数组
     let list = citylist[letter]
     return (

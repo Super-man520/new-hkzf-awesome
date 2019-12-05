@@ -8,21 +8,29 @@ import { withRouter } from 'react-router-dom'
 class NavHeader extends React.Component {
   render() {
     // console.log(this.props)
-    const { className, children, history } = this.props
+    const { className, rightContent, onLeftClick, children } = this.props
+
     return (
-      <NavBar
+      <NavBar rightContent={rightContent}
         className={['headNav', className].join(' ')}
         icon={<i className="iconfont icon-back" />}
         mode="light"
-        onLeftClick={() => history.go(-1)}
+        onLeftClick={onLeftClick || this.handleClick}
       >{children}</NavBar>
     )
   }
+  handleClick = () => {
+    this.props.history.go(-1)
+  }
+}
+// 设置默认属性
+NavHeader.defaultProps = {
+  children: '好好啊好000'
 }
 // PropTypes 属性后面加上 `isRequired` 确保这个 prop 没有被提供时，会打印警告信息
 // 校验children字段
 NavHeader.propTypes = {
-  children: PropTypes.string.isRequired
+  children: PropTypes.string.isRequired,
 }
 let WithNavHeader = withRouter(NavHeader)
 export default WithNavHeader

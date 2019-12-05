@@ -1,6 +1,6 @@
-import React from 'react'
+import React from './node_modules/react'
 // import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { TabBar } from 'antd-mobile';
+import { TabBar } from './node_modules/antd-mobile';
 
 class TabBarExample extends React.Component {
   constructor(props) {

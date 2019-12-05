@@ -1,5 +1,5 @@
 import React from 'react'
-import List from './list/list'
+import List from './List/List'
 
 class House extends React.Component {
   render() {

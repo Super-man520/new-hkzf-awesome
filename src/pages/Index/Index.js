@@ -3,7 +3,7 @@ import { Carousel, Flex, Grid, WingBlank } from 'antd-mobile'
 import axios from 'axios'
 import './index.scss'
 // 导入当前城市
-import { getCurrCity } from '../../utils/CurrCity/currcity'
+import { getCurrCity } from '../../utils/CurrCity/Currcity'
 // 导入头部搜索框
 import WithSearchHeader from '../../components/SearchHeader/SearchHeader'
 // 导入图片
@@ -16,7 +16,7 @@ const navData = [
   { pathname: '/home/houselist', id: 1, text: '整租', navUrl: nav1 },
   { pathname: '/home/houselist', id: 2, text: '合租', navUrl: nav2 },
   { pathname: '/map', id: 3, text: '地图找房', navUrl: nav3 },
-  { pathname: '/login', id: 4, text: '去出租', navUrl: nav4 }
+  { pathname: '/rent/add', id: 4, text: '去出租', navUrl: nav4 }
 ]
 // 城市选择
 // if (navigator.geolocation) {
@@ -65,23 +65,7 @@ class Index extends React.Component {
           </a>
         ))}
       </Carousel>
-      {/* <div className="header-nav">
-        <div className="header-more">
-          <div className="city" onClick={() => {
-            this.props.history.push('/citylist')
-          }}>
-            <span>{this.state.currCity}</span>
-            <i className="iconfont icon-arrow"></i>
-          </div>
-          <div className="search">
-            <i className="iconfont icon-seach"></i>
-            <span>请输入小区地址</span>
-          </div>
-        </div>
-        <div className="map" onClick={() => this.props.history.push('/map')}>
-          <i className="iconfont icon-map"></i>
-        </div>
-      </div> */}
+
       <WithSearchHeader></WithSearchHeader>
     </div>
   }
@@ -128,19 +112,6 @@ class Index extends React.Component {
     this.getGroups()
     this.getNews()
     // 利用百度地图api获取当前城市
-    // let myCity = new window.BMap.LocalCity();
-    // myCity.get(async result => {
-    //   // console.log(result)
-    //   // 根据城市名称查询城市信息
-    //   let res = await axios.get('http://localhost:8080/area/info', {
-    //     params: {
-    //       name: result.name
-    //     }
-    //   })
-    //   // console.log(res)
-    //   const { body } = res.data
-    //   // 存储  设置当前城市
-    // })
     let currCity = await getCurrCity()
     // console.log(currCity)
     this.setState({

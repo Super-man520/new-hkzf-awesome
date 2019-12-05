@@ -62,10 +62,11 @@
     margin-right    : 10px;
     margin-bottom   : 10px;
     padding         : 15px;
+    padding-top     : 3px;
     background-color: #fff;
 
     .am-grid-item-content {
-      height : 50px !important;
+      // height : 50px !important;
       padding: 12px 0 !important;
     }
 
@@ -175,7 +176,7 @@
     .map {
       .icon-map {
         font-size: 25px;
-        color: #fff;
+        color    : #fff;
       }
     }
   }

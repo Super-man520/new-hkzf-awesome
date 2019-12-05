@@ -7,6 +7,7 @@ import Index from '../Index/Index'
 import HouseList from '../HouseList/HouseList'
 import News from '../News/News'
 import My from '../My/My'
+import './home.scss'
 
 const TabBarList = [
   { id: 1, title: '首页', pathname: '/home', icon: 'icon-ind' },
