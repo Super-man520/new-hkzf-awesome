@@ -6,8 +6,8 @@ class Listing extends React.Component {
   render() {
     let { houseList } = this.props
     return (
-      houseList.map(item => (
-        <div className={styles.houselist} key={item.houseCode} onClick={() => {
+      houseList.map((item, index) => (
+        <div className={styles.houselist} key={index} onClick={() => {
           this.props.history.push(`/details/${item.houseCode}`)
         }}>
           <div className={styles.houseimg}>

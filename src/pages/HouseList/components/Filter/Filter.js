@@ -85,7 +85,12 @@ class Filter extends Component {
     return (<Spring
       from={{ opacity: 0 }}
       to={{ opacity: isFadeIn ? 1 : 0 }}>
-      {props => <div style={props} className={styles.mask} onClick={this.onCancel}></div>}
+      {props => {
+        if (props.opacity === 0) return null
+        return (
+          <div style={props} className={styles.mask} onClick={this.onCancel}></div>
+        )
+      }}
     </Spring>)
   }
   // 点击遮罩层关闭filterPicker
@@ -150,6 +155,8 @@ class Filter extends Component {
       titleSelectedStatus: newTitleSelectedStatus
     }, () => {
       this.setFilter()
+      // 设置筛选条件之后恢复正常状态
+      window.scroll(0, 0)
     })
   }
   // 用于封装筛选条件的到的房屋信息
@@ -160,7 +167,7 @@ class Filter extends Component {
     let { selectedValues } = this.state
     // 封装需要筛选调价的数据
     let filter = {}
-    console.log(selectedValues)
+    // console.log(selectedValues)
     // mode --> rentType
     filter.rentType = selectedValues['mode'][0]
     // price --> price

@@ -83,7 +83,7 @@ class Search extends React.Component {
     const { history } = this.props
     return (
       <div className={styles.search}>
-        <SearchBar placeholder="Search" maxLength={8} value={searchTxt}
+        <SearchBar placeholder="请输入搜索关键字" maxLength={8} value={searchTxt}
           onChange={this.handleSearchTxt}
           onCancel={() => history.replace('/rent/add')}
         />

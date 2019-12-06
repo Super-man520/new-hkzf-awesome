@@ -40,7 +40,7 @@ class Add extends React.Component {
 
   constructor(props) {
     super(props)
-    console.log(props)
+    // console.log(props)
     const { state } = props.location
     // 小区的名称和id
     const community = {

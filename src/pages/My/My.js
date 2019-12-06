@@ -59,7 +59,7 @@ class My extends React.Component {
       return
     }
     let res = await API.get('user')
-    console.log(res)
+    // console.log(res)
     //状态分两种  登录成功和token失效、
     if (res.data.status === 200) {
       const { avatar, nickname } = res.data.body

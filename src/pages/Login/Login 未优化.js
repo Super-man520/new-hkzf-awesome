@@ -9,7 +9,7 @@ import { setToken } from '../../utils/Token'
 import NavHeader from '../../components/NavHeader/Navheader'
 
 import styles from './login.module.scss'
-import { Form, Field, ErrorMessage, withFormik } from 'formik'
+import { ErrorMessage, withFormik } from 'formik'
 import * as Yup from "yup"
 
 // 验证规则：
@@ -17,11 +17,9 @@ const REG_UNAME = /^[a-zA-Z_\d]{5,8}$/
 const REG_PWD = /^[a-zA-Z_\d]{5,12}$/
 
 class Login extends Component {
-  aa=(e)=>{
-    console.log(e)
-  }
   render() {
     // console.log(this.props)
+    let { handleSubmit, values, handleChange } = this.props
     return (
       <div className={styles.root}>
         {/* 顶部导航 */}
@@ -30,12 +28,14 @@ class Login extends Component {
 
         {/* 登录表单 */}
         <WingBlank>
-          <Form>
+          <form onSubmit={handleSubmit}>
             <div className={styles.formItem}>
-              <Field
+              <input
                 className={styles.input}
                 name="username"
                 placeholder="请输入账号"
+                value={values.username}
+                onChange={handleChange}
               />
             </div>
             {/* 长度为5到8位，只能出现数字、字母、下划线 */}
@@ -45,11 +45,13 @@ class Login extends Component {
               component="span">
             </ErrorMessage>
             <div className={styles.formItem}>
-              <Field
+              <input
                 className={styles.input}
                 name="password"
                 type="password"
                 placeholder="请输入密码"
+                value={values.password}
+                onChange={handleChange}
               />
             </div>
             {/* 长度为5到12位，只能出现数字、字母、下划线 */}
@@ -63,7 +65,7 @@ class Login extends Component {
                 登 录
               </button>
             </div>
-          </Form>
+          </form>
           <Flex className={styles.backHome}>
             <Flex.Item>
               <Link to="/registe">还没有账号，去注册~</Link>
@@ -74,7 +76,6 @@ class Login extends Component {
     )
   }
 }
-// 配置项
 const config = {
 
   mapPropsToValues: () => ({ username: '', password: '' }),
@@ -82,7 +83,7 @@ const config = {
   // values formik中管理的表单项的值
   // props里面有需要用的路由信息
   handleSubmit: async (values, { props }) => {
-    // console.log(values, props)
+    console.log(values, props)
     let { username, password } = values
     let res = await API.post(`/user/login`, { username, password })
     // console.log(res)
@@ -93,13 +94,13 @@ const config = {
     if (status === 200) {
       // 设置token到本地
       setToken(body.token)
-      Toast.info(description, 1)
+      Toast.info(description, 2)
       // 判断是不是鉴权组件过来的
       let $state = props.location.state
       if ($state) {
-        props.history.replace($state.from.pathname)
+        // props.history.replace($state.from.pathname)
       } else {
-        props.history.go(-1)
+        // props.history.go(-1)
       }
     }
   },
@@ -115,7 +116,6 @@ const config = {
       .matches(REG_PWD, '长度为5到12位，只能出现数字、字母、下划线')
   }),
 }
-// 第一个参数配置项  第二个参数要渲染的组件
 const WithLogin = withFormik(config)(Login)
 
 export default WithLogin

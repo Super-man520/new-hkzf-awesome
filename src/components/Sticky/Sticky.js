@@ -26,9 +26,10 @@ class Sticky extends Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll)
   }
+  // sticky父盒子固定高度,子盒子的高度不影响布局
   render() {
     return (
-      <div className={styles.stikcy}>
+      <div className={styles.sticky}>
         <div className='placeholder' ref={this.placeholderRef}></div>
         <div className='content' ref={this.contentRef}>
           {this.props.children}
